@@ -1,0 +1,167 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//HC Metter-Enz//H4A Auto Calendar//DE
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:HC Metter-Enz 2026/27
+BEGIN:VEVENT
+UID:9448571@handball4all.de
+DTSTART;TZID=Europe/Berlin:20260919T200000
+DTEND;TZID=Europe/Berlin:20260919T220000
+SUMMARY:HC Metter-Enz – TSV Oberriex.
+LOCATION:Kaltensteinhalle\, Alter Postweg 10\, 71665 Vaihingen/Enz
+DESCRIPTION:Spielnummer 100135
+END:VEVENT
+BEGIN:VEVENT
+UID:9448591@handball4all.de
+DTSTART;TZID=Europe/Berlin:20260927T173000
+DTEND;TZID=Europe/Berlin:20260927T193000
+SUMMARY:TSV Korntal – HC Metter-Enz
+LOCATION:Sporthalle Korntal\, Martin-Luther-Straße 32\, 70825 Korntal-Münchingen
+DESCRIPTION:Spielnummer 100139
+END:VEVENT
+BEGIN:VEVENT
+UID:9448631@handball4all.de
+DTSTART;TZID=Europe/Berlin:20261010T153000
+DTEND;TZID=Europe/Berlin:20261010T173000
+SUMMARY:HSG Marb/Riel – HC Metter-Enz
+LOCATION:Stadionhalle\, Am Leiselstein 4\, 71672 Marbach/Neckar
+DESCRIPTION:Spielnummer 100147
+END:VEVENT
+BEGIN:VEVENT
+UID:9448651@handball4all.de
+DTSTART;TZID=Europe/Berlin:20261017T200000
+DTEND;TZID=Europe/Berlin:20261017T220000
+SUMMARY:HC Metter-Enz – BBM Bietigheim 4
+LOCATION:Kaltensteinhalle\, Alter Postweg 10\, 71665 Vaihingen/Enz
+DESCRIPTION:Spielnummer 100151
+END:VEVENT
+BEGIN:VEVENT
+UID:9448676@handball4all.de
+DTSTART;TZID=Europe/Berlin:20261024T140000
+DTEND;TZID=Europe/Berlin:20261024T160000
+SUMMARY:HB Ludwigsburg 3 – HC Metter-Enz
+LOCATION:Hermann-Batz-Halle\, Tammer Straße 20\, 71634 Ludwigsburg-Eglosheim
+DESCRIPTION:Spielnummer 100156
+END:VEVENT
+BEGIN:VEVENT
+UID:9448686@handball4all.de
+DTSTART;TZID=Europe/Berlin:20261031T190000
+DTEND;TZID=Europe/Berlin:20261031T210000
+SUMMARY:HC Metter-Enz – TV Tamm
+LOCATION:Sporthalle Großsachsenheim\, Oberriexingerstraße 33-35\, 74343 Sachsenheim-Großsachsenheim
+DESCRIPTION:Spielnummer 100158
+END:VEVENT
+BEGIN:VEVENT
+UID:9448726@handball4all.de
+DTSTART;TZID=Europe/Berlin:20261114T180000
+DTEND;TZID=Europe/Berlin:20261114T200000
+SUMMARY:HC Metter-Enz – HSG Strohgäu
+LOCATION:Kaltensteinhalle\, Alter Postweg 10\, 71665 Vaihingen/Enz
+DESCRIPTION:Spielnummer 100166
+END:VEVENT
+BEGIN:VEVENT
+UID:9448766@handball4all.de
+DTSTART;TZID=Europe/Berlin:20261121T200000
+DTEND;TZID=Europe/Berlin:20261121T220000
+SUMMARY:HC Metter-Enz – Bottwar SG 3
+LOCATION:Sporthalle Großsachsenheim\, Oberriexingerstraße 33-35\, 74343 Sachsenheim-Großsachsenheim
+DESCRIPTION:Spielnummer 100174
+END:VEVENT
+BEGIN:VEVENT
+UID:9448771@handball4all.de
+DTSTART;TZID=Europe/Berlin:20261128T180000
+DTEND;TZID=Europe/Berlin:20261128T200000
+SUMMARY:SG SchoBott 3 – HC Metter-Enz
+LOCATION:Langhanshalle\, Albert-Einstein-Straße 20\, 71717 Beilstein
+DESCRIPTION:Spielnummer 100175
+END:VEVENT
+BEGIN:VEVENT
+UID:9448816@handball4all.de
+DTSTART;TZID=Europe/Berlin:20261212T160000
+DTEND;TZID=Europe/Berlin:20261212T180000
+SUMMARY:SV K'westheim 3 – HC Metter-Enz
+LOCATION:Sporthalle Ost\, Theodor-Heuss-Straße 6\, 70806 Kornwestheim
+DESCRIPTION:Spielnummer 100184
+END:VEVENT
+BEGIN:VEVENT
+UID:9449046@handball4all.de
+DTSTART;TZID=Europe/Berlin:20270109T200000
+DTEND;TZID=Europe/Berlin:20270109T220000
+SUMMARY:HC Metter-Enz – SG SchoBott 3
+LOCATION:Kaltensteinhalle\, Alter Postweg 10\, 71665 Vaihingen/Enz
+DESCRIPTION:Spielnummer 100230
+END:VEVENT
+BEGIN:VEVENT
+UID:9448866@handball4all.de
+DTSTART;TZID=Europe/Berlin:20270123T200000
+DTEND;TZID=Europe/Berlin:20270123T220000
+SUMMARY:HC Metter-Enz – TSV Korntal
+LOCATION:Kaltensteinhalle\, Alter Postweg 10\, 71665 Vaihingen/Enz
+DESCRIPTION:Spielnummer 100194
+END:VEVENT
+BEGIN:VEVENT
+UID:9448846@handball4all.de
+DTSTART;TZID=Europe/Berlin:20270131T133000
+DTEND;TZID=Europe/Berlin:20270131T153000
+SUMMARY:TSV Oberriex. – HC Metter-Enz
+LOCATION:Sporthalle\, Mühlstraße 25\, 71739 Oberriexingen
+DESCRIPTION:Spielnummer 100190
+END:VEVENT
+BEGIN:VEVENT
+UID:9448906@handball4all.de
+DTSTART;TZID=Europe/Berlin:20270220T200000
+DTEND;TZID=Europe/Berlin:20270220T220000
+SUMMARY:HC Metter-Enz – HSG Marb/Riel
+LOCATION:Kaltensteinhalle\, Alter Postweg 10\, 71665 Vaihingen/Enz
+DESCRIPTION:Spielnummer 100202
+END:VEVENT
+BEGIN:VEVENT
+UID:9448926@handball4all.de
+DTSTART;TZID=Europe/Berlin:20270228T180000
+DTEND;TZID=Europe/Berlin:20270228T200000
+SUMMARY:BBM Bietigheim 4 – HC Metter-Enz
+LOCATION:Sporthalle am Viadukt\, Holzgartenstraße 28\, 74321 Bietigheim-Bissingen
+DESCRIPTION:Spielnummer 100206
+END:VEVENT
+BEGIN:VEVENT
+UID:9448951@handball4all.de
+DTSTART;TZID=Europe/Berlin:20270306T200000
+DTEND;TZID=Europe/Berlin:20270306T220000
+SUMMARY:HC Metter-Enz – HB Ludwigsburg 3
+LOCATION:Sporthalle Großsachsenheim\, Oberriexingerstraße 33-35\, 74343 Sachsenheim-Großsachsenheim
+DESCRIPTION:Spielnummer 100211
+END:VEVENT
+BEGIN:VEVENT
+UID:9448961@handball4all.de
+DTSTART;TZID=Europe/Berlin:20270313T200000
+DTEND;TZID=Europe/Berlin:20270313T220000
+SUMMARY:TV Tamm – HC Metter-Enz
+LOCATION:Sporthalle Egelsee\, Ludwigsburger Straße 19\, 71732 Tamm
+DESCRIPTION:Spielnummer 100213
+END:VEVENT
+BEGIN:VEVENT
+UID:9449001@handball4all.de
+DTSTART;TZID=Europe/Berlin:20270403T160000
+DTEND;TZID=Europe/Berlin:20270403T180000
+SUMMARY:HSG Strohgäu – HC Metter-Enz
+LOCATION:Strohgäuhalle\, Eberdinger Straße\, 71282 Hemmingen
+DESCRIPTION:Spielnummer 100221
+END:VEVENT
+BEGIN:VEVENT
+UID:9449041@handball4all.de
+DTSTART;TZID=Europe/Berlin:20270410T160000
+DTEND;TZID=Europe/Berlin:20270410T180000
+SUMMARY:Bottwar SG 3 – HC Metter-Enz
+LOCATION:Sporthalle In den Bäderwiesen\, Dürrenstraße 1\, 71720 Oberstenfeld
+DESCRIPTION:Spielnummer 100229
+END:VEVENT
+BEGIN:VEVENT
+UID:9449091@handball4all.de
+DTSTART;TZID=Europe/Berlin:20270417T200000
+DTEND;TZID=Europe/Berlin:20270417T220000
+SUMMARY:HC Metter-Enz – SV K'westheim 3
+LOCATION:Sporthalle Großsachsenheim\, Oberriexingerstraße 33-35\, 74343 Sachsenheim-Großsachsenheim
+DESCRIPTION:Spielnummer 100239
+END:VEVENT
+END:VCALENDAR
