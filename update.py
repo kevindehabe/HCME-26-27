@@ -22,6 +22,10 @@ for g in games:
     end=start+timedelta(hours=2)
     loc=', '.join(x for x in [g.get('gGymnasiumName',''), g.get('gGymnasiumStreet',''), (g.get('gGymnasiumPostal','')+' '+g.get('gGymnasiumTown','')).strip()] if x)
     summary=f"{g.get('gHomeTeam','')} – {g.get('gGuestTeam','')}"
-    lines += ['BEGIN:VEVENT',f"UID:{g['gID']}@handball4all.de",f"DTSTART;TZID=Europe/Berlin:{start.strftime('%Y%m%dT%H%M%S')}",f"DTEND;TZID=Europe/Berlin:{end.strftime('%Y%m%dT%H%M%S')}",f"SUMMARY:{esc(summary)}",f"LOCATION:{esc(loc)}",f"DESCRIPTION:Spielnummer {esc(g.get('gNo',''))}",'END:VEVENT']
+    description=f"Spielnummer {g.get('gNo','')}"
+    if g.get('sGID'):
+        liveticker=f"https://spo.handball4all.de/misc/sboPublicReports.php?sGID={g['sGID']}"
+        description += f"\nLiveticker: {liveticker}"
+    lines += ['BEGIN:VEVENT',f"UID:{g['gID']}@handball4all.de",f"DTSTART;TZID=Europe/Berlin:{start.strftime('%Y%m%dT%H%M%S')}",f"DTEND;TZID=Europe/Berlin:{end.strftime('%Y%m%dT%H%M%S')}",f"SUMMARY:{esc(summary)}",f"LOCATION:{esc(loc)}",f"DESCRIPTION:{esc(description)}",'END:VEVENT']
 lines.append('END:VCALENDAR')
 open('hcme.ics','w',encoding='utf-8',newline='').write('\r\n'.join(lines)+'\r\n')
