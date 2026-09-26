@@ -10,6 +10,7 @@ DTSTART;TZID=Europe/Berlin:20260919T200000
 DTEND;TZID=Europe/Berlin:20260919T220000
 SUMMARY:HC Metter-Enz – TSV Oberriex.
 LOCATION:Kaltensteinhalle\, Alter Postweg 10\, 71665 Vaihingen/Enz
+URL:https://spo.handball4all.de/misc/sboPublicReports.php?sGID=3501776
 DESCRIPTION:Spielnummer 100135\nLiveticker: https://spo.handball4all.de/misc/sboPublicReports.php?sGID=3501776
 END:VEVENT
 BEGIN:VEVENT
