@@ -16,8 +16,6 @@ obj=data[0]
 games=obj['content']['futureGames']['games']
 lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//HC Metter-Enz//H4A Auto Calendar//DE','CALSCALE:GREGORIAN','METHOD:PUBLISH','X-WR-CALNAME:HC Metter-Enz 2026/27']
 for g in games:
-    if g.get('gNo') == '100139':
-        print('DEBUG_GAME_100139', repr(g))
     if TEAM not in (g.get('gHomeTeam',''), g.get('gGuestTeam','')):
         continue
     start=datetime.strptime(g['gDate']+' '+g['gTime'],'%d.%m.%y %H:%M').replace(tzinfo=TZ)
@@ -25,9 +23,12 @@ for g in games:
     loc=', '.join(x for x in [g.get('gGymnasiumName',''), g.get('gGymnasiumStreet',''), (g.get('gGymnasiumPostal','')+' '+g.get('gGymnasiumTown','')).strip()] if x)
     summary=f"{g.get('gHomeTeam','')} – {g.get('gGuestTeam','')}"
     description=f"Spielnummer {g.get('gNo','')}"
-    if g.get('sGID'):
-        liveticker=f"https://spo.handball4all.de/misc/sboPublicReports.php?sGID={g['sGID']}"
+    sbo_id=str(g.get('sGID','')).strip()
+    if sbo_id and sbo_id != '0':
+        liveticker=f"https://spo.handball4all.de/misc/sboPublicReports.php?sGID={sbo_id}"
         description += f"\nLiveticker: {liveticker}"
+    else:
+        description += "\nLiveticker: wird automatisch ergänzt, sobald Handball4all ihn freigibt."
     lines += ['BEGIN:VEVENT',f"UID:{g['gID']}@handball4all.de",f"DTSTART;TZID=Europe/Berlin:{start.strftime('%Y%m%dT%H%M%S')}",f"DTEND;TZID=Europe/Berlin:{end.strftime('%Y%m%dT%H%M%S')}",f"SUMMARY:{esc(summary)}",f"LOCATION:{esc(loc)}",f"DESCRIPTION:{esc(description)}",'END:VEVENT']
 lines.append('END:VCALENDAR')
 open('hcme.ics','w',encoding='utf-8',newline='').write('\r\n'.join(lines)+'\r\n')
