@@ -1,12 +1,9 @@
 name: Update HCME calendar
 
 on:
-  schedule:
-    - cron: '*/5 * * * *'
   workflow_dispatch:
   push:
     paths:
-      - 'update.py'
       - '.github/workflows/update-hcme-calendar.yml'
 
 permissions:
@@ -24,37 +21,25 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Discover nearby league ids
+      - name: Locate Frauen Bezirksoberliga
         run: |
           python - <<'PY'
-          import json, urllib.request, time
+          import json, urllib.request
           from concurrent.futures import ThreadPoolExecutor, as_completed
 
+          ids=list(range(161571,161652,5))
           def probe(cl):
               url=f'https://spo.handball4all.de/service/if_g_json.php?ca=0&cl={cl}&cmd=ps&og=216'
               try:
-                  req=urllib.request.Request(url, headers={'User-Agent':'Mozilla/5.0'})
-                  with urllib.request.urlopen(req, timeout=8) as r:
-                      data=json.load(r)
+                  req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0'})
+                  with urllib.request.urlopen(req,timeout=10) as r: data=json.load(r)
               except Exception as e:
-                  return cl, None, type(e).__name__
+                  return cl,None,type(e).__name__
               obj=data[0] if isinstance(data,list) and data else {}
               head=obj.get('head',{})
-              if not head:
-                  head=(obj.get('content') or {}).get('head',{})
-              menu=obj.get('menu',{})
-              return cl, {
-                  'name':head.get('name'),
-                  'headline1':head.get('headline1'),
-                  'headline2':head.get('headline2'),
-                  'period':menu.get('period'),
-                  'has_hcme':'HC Metter-Enz' in json.dumps(data,ensure_ascii=False)
-              }, None
+              return cl,{'name':head.get('name'),'headline2':head.get('headline2'),'has_hcme':'HC Metter-Enz' in json.dumps(data,ensure_ascii=False)},None
 
-          with ThreadPoolExecutor(max_workers=5) as ex:
-              futures=[ex.submit(probe,cl) for cl in range(161520,161571)]
-              for f in as_completed(futures):
-                  cl,info,err=f.result()
-                  if info:
-                      print(cl, json.dumps(info,ensure_ascii=False))
+          with ThreadPoolExecutor(max_workers=3) as ex:
+              for f in as_completed([ex.submit(probe,cl) for cl in ids]):
+                  print(f.result())
           PY
