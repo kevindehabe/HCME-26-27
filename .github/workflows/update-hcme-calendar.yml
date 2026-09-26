@@ -24,6 +24,31 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Discover Frauen league
+        run: |
+          python - <<'PY'
+          import json, urllib.request
+          for cl in range(161500, 161601):
+              url=f'https://spo.handball4all.de/service/if_g_json.php?ca=0&cl={cl}&cmd=ps&og=216'
+              try:
+                  with urllib.request.urlopen(url, timeout=8) as r:
+                      data=json.load(r)
+              except Exception:
+                  continue
+              raw=json.dumps(data, ensure_ascii=False)
+              if 'HC Metter-Enz' not in raw:
+                  continue
+              obj=data[0] if isinstance(data,list) and data else {}
+              content=obj.get('content',{})
+              print('FOUND CL', cl)
+              print('TOP', {k:v for k,v in obj.items() if k != 'content'})
+              print('CONTENT_KEYS', list(content.keys()))
+              print('SCORE', content.get('score'))
+              games=(content.get('futureGames') or {}).get('games',[])
+              for g in games:
+                  if 'HC Metter-Enz' in (g.get('gHomeTeam',''), g.get('gGuestTeam','')):
+                      print('GAME', g)
+          PY
       - name: Generate calendar
         run: python update.py
       - name: Commit changes
