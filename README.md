@@ -10,6 +10,6 @@ Auf dem iPhone: Kalender → Kalender → Kalender hinzufügen → Kalenderabonn
 
 ## Automatische Aktualisierung
 
-GitHub Actions fragt Handball4all alle zwei Stunden zur Minute 17 ab. Ein manueller Start ist über Actions möglich. Änderungen an update.py oder am Workflow starten ebenfalls eine Aktualisierung. Geplante Läufe können von GitHub verzögert oder nach längerer Inaktivität deaktiviert werden.
+GitHub Actions fragt Handball4all alle fünf Minuten ab. Ein manueller Start ist über Actions möglich. Änderungen an update.py oder am Workflow starten ebenfalls eine Aktualisierung. Geplante Läufe können von GitHub verzögert oder nach längerer Inaktivität deaktiviert werden.
 
 Die Spiel-UIDs bleiben beim Umzug erhalten. Jeder Termin belegt zwei Stunden ab Anwurf.
