@@ -15,7 +15,7 @@ CALENDARS = [
         'name': 'HC Metter-Enz 2026/27',
     },
     {
-        'api': 'https://spo.handball4all.de/service/if_g_json.php?ca=0&cl=161581&cmd=ps&og=216',
+        'api': 'https://spo.handball4all.de/service/if_g_json.php?ca=0&cl=161581&cmd=ps&ct=1451841&og=216',
         'file': 'frauen1.ics',
         'name': 'HCME Frauen 1 2026/27',
     },
