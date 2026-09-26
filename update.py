@@ -16,6 +16,8 @@ obj=data[0]
 games=obj['content']['futureGames']['games']
 lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//HC Metter-Enz//H4A Auto Calendar//DE','CALSCALE:GREGORIAN','METHOD:PUBLISH','X-WR-CALNAME:HC Metter-Enz 2026/27']
 for g in games:
+    if g.get('gNo') == '100139':
+        print('DEBUG_GAME_100139', repr(g))
     if TEAM not in (g.get('gHomeTeam',''), g.get('gGuestTeam','')):
         continue
     start=datetime.strptime(g['gDate']+' '+g['gTime'],'%d.%m.%y %H:%M').replace(tzinfo=TZ)
