@@ -24,11 +24,14 @@ for g in games:
     summary=f"{g.get('gHomeTeam','')} – {g.get('gGuestTeam','')}"
     description=f"Spielnummer {g.get('gNo','')}"
     sbo_id=str(g.get('sGID','')).strip()
+    event_lines = ['BEGIN:VEVENT',f"UID:{g['gID']}@handball4all.de",f"DTSTART;TZID=Europe/Berlin:{start.strftime('%Y%m%dT%H%M%S')}",f"DTEND;TZID=Europe/Berlin:{end.strftime('%Y%m%dT%H%M%S')}",f"SUMMARY:{esc(summary)}",f"LOCATION:{esc(loc)}"]
     if sbo_id and sbo_id != '0':
         liveticker=f"https://spo.handball4all.de/misc/sboPublicReports.php?sGID={sbo_id}"
         description += f"\nLiveticker: {liveticker}"
+        event_lines.append(f"URL:{liveticker}")
     else:
         description += "\nLiveticker: wird automatisch ergänzt, sobald Handball4all ihn freigibt."
-    lines += ['BEGIN:VEVENT',f"UID:{g['gID']}@handball4all.de",f"DTSTART;TZID=Europe/Berlin:{start.strftime('%Y%m%dT%H%M%S')}",f"DTEND;TZID=Europe/Berlin:{end.strftime('%Y%m%dT%H%M%S')}",f"SUMMARY:{esc(summary)}",f"LOCATION:{esc(loc)}",f"DESCRIPTION:{esc(description)}",'END:VEVENT']
+    event_lines += [f"DESCRIPTION:{esc(description)}",'END:VEVENT']
+    lines += event_lines
 lines.append('END:VCALENDAR')
 open('hcme.ics','w',encoding='utf-8',newline='').write('\r\n'.join(lines)+'\r\n')
