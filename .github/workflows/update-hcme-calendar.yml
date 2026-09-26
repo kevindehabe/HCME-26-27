@@ -14,7 +14,7 @@ permissions:
 
 concurrency:
   group: hcme-calendar-update
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   update:
@@ -28,26 +28,38 @@ jobs:
         run: |
           python - <<'PY'
           import json, urllib.request
-          for cl in range(161500, 161601):
+          from concurrent.futures import ThreadPoolExecutor, as_completed
+
+          def probe(cl):
               url=f'https://spo.handball4all.de/service/if_g_json.php?ca=0&cl={cl}&cmd=ps&og=216'
               try:
-                  with urllib.request.urlopen(url, timeout=8) as r:
+                  with urllib.request.urlopen(url, timeout=4) as r:
                       data=json.load(r)
               except Exception:
-                  continue
+                  return None
               raw=json.dumps(data, ensure_ascii=False)
               if 'HC Metter-Enz' not in raw:
-                  continue
-              obj=data[0] if isinstance(data,list) and data else {}
-              content=obj.get('content',{})
-              print('FOUND CL', cl)
-              print('TOP', {k:v for k,v in obj.items() if k != 'content'})
-              print('CONTENT_KEYS', list(content.keys()))
-              print('SCORE', content.get('score'))
-              games=(content.get('futureGames') or {}).get('games',[])
-              for g in games:
-                  if 'HC Metter-Enz' in (g.get('gHomeTeam',''), g.get('gGuestTeam','')):
-                      print('GAME', g)
+                  return None
+              return cl, data
+
+          with ThreadPoolExecutor(max_workers=24) as ex:
+              futures={ex.submit(probe, cl):cl for cl in range(161400, 161701)}
+              for f in as_completed(futures):
+                  out=f.result()
+                  if not out:
+                      continue
+                  cl,data=out
+                  obj=data[0] if isinstance(data,list) and data else {}
+                  c=obj.get('content',{})
+                  print('FOUND CL', cl)
+                  print('TOP', {k:v for k,v in obj.items() if k != 'content'})
+                  print('CONTENT_KEYS', list(c.keys()))
+                  print('SCORE', c.get('score'))
+                  for bucket in ('futureGames','pastGames'):
+                      games=(c.get(bucket) or {}).get('games',[])
+                      for g in games:
+                          if 'HC Metter-Enz' in (g.get('gHomeTeam',''), g.get('gGuestTeam','')):
+                              print(bucket, 'GAME', g)
           PY
       - name: Generate calendar
         run: python update.py
