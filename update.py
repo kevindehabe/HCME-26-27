@@ -84,7 +84,7 @@ def existing_report_ids(outfile):
         return result
     for event in calendar.split('BEGIN:VEVENT')[1:]:
         uid = re.search(r'^UID:([0-9]+)@handball4all\.de\r?$', event, re.MULTILINE)
-        report = re.search(r'^URL:https://spo\.handball4all\.de/misc/sboPublicReports\.php\?sGID=([0-9]+)\r?$', event, re.MULTILINE)
+        report = re.search(r'https://spo\.handball4all\.de/misc/sboPublicReports\.php\?sGID=([0-9]+)', event)
         if uid and report and valid_sgid(report.group(1)):
             result[uid.group(1)] = report.group(1)
     return result
@@ -139,7 +139,6 @@ def build_calendar(api, outfile, calendar_name):
         if sbo_id:
             report_url = f'https://spo.handball4all.de/misc/sboPublicReports.php?sGID={sbo_id}'
             description += f"\nSpielbericht (PDF): {report_url}"
-            event_lines.append(f'URL:{report_url}')
             event_lines.extend(fold_ascii_line(f'ATTACH;FMTTYPE=application/pdf:{report_url}'))
         else:
             description += '\nSpielbericht (PDF): wird ergänzt, sobald Handball4all ihn bereitstellt.'
