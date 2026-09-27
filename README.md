@@ -14,9 +14,16 @@ Auf dem iPhone: Kalender → Kalender → Kalender hinzufügen → Kalenderabonn
 
 ## Automatische Aktualisierung
 
-GitHub Actions ist für Aktualisierungen alle fünf Minuten eingerichtet. Beide Kalender werden unabhängig voneinander erzeugt. Sobald Handball4all für ein Spiel eine SBO-/Liveticker-ID veröffentlicht, wird der Liveticker automatisch in den Termin übernommen. IDs aus bereits veröffentlichten Kalendereinträgen bleiben erhalten, falls eine API-Antwort sie vorübergehend nicht enthält.
+GitHub Actions ist für Aktualisierungen alle fünf Minuten eingerichtet (jeweils ab Minute 2). Beide Kalender werden unabhängig voneinander erzeugt. Sobald Handball4all für ein Spiel eine SBO-/Liveticker-ID veröffentlicht, wird der Liveticker automatisch in den Termin übernommen. IDs aus bereits veröffentlichten Kalendereinträgen bleiben erhalten, falls eine API-Antwort sie vorübergehend nicht enthält.
 
-Zusätzlich kann der Render-Cronjob aus `render.yaml` das GitHub-Update alle fünf Minuten im Fenster von zwei Stunden vor bis vier Stunden nach einem Männer- oder Frauen-Spiel auslösen. Ohne Spiel startet er einmal täglich um 08:00 UTC. Dafür in Render beim Erstellen des Blueprints `GITHUB_ACTIONS_TOKEN` als geheime Umgebungsvariable setzen: ein auf dieses Repo begrenzter Fine-Grained-GitHub-Token mit **Actions: Read and write**. Der Cronjob kostet mindestens 1 USD pro Monat plus gegebenenfalls weitere Laufzeitkosten. Der GitHub-Zeitplan bleibt als Rückfallebene aktiv und ist nicht minutengenau.
+Für einen zusätzlichen, kostenlosen Fünf-Minuten-Auslöser lässt sich auf https://cron-job.org ein HTTP-Job einrichten. Er startet denselben GitHub-Workflow; das bestehende Kalenderabo bleibt gleich. Einstellungen:
+
+- URL: `https://api.github.com/repos/kevindehabe/HCME-26-27/actions/workflows/update-hcme-calendar.yml/dispatches`
+- Methode: `POST`; Zeitplan: alle 5 Minuten
+- Request-Body (JSON): `{"ref":"main"}`
+- Header: `Accept: application/vnd.github+json`, `Content-Type: application/json`, `Authorization: Bearer <TOKEN>`
+
+Der Token wird in GitHub als Fine-Grained-PAT nur für `kevindehabe/HCME-26-27` mit `Actions: Read and write` angelegt und in cron-job.org eingetragen. Keinen Token ins Repository oder in einen Chat kopieren. GitHub Actions bleibt als Rückfallebene aktiv; kein externer Zeitplan kann die Aktualisierung in der Kalender-App erzwingen.
 
 Ein manueller Start ist über Actions möglich. Änderungen an update.py oder am Workflow starten ebenfalls eine Aktualisierung. Geplante Läufe können von GitHub verzögert oder nach längerer Inaktivität deaktiviert werden.
 
