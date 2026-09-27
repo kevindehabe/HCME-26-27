@@ -64,6 +64,16 @@ def valid_sgid(value):
     return bool(re.fullmatch(r'[1-9][0-9]*', str(value or '').strip()))
 
 
+def fold_ascii_line(value):
+    """Fold an ASCII iCalendar property at the 75-octet line limit."""
+    chunks = [value[:75]]
+    value = value[75:]
+    while value:
+        chunks.append(' ' + value[:74])
+        value = value[74:]
+    return chunks
+
+
 def existing_report_ids(outfile):
     """Keep an already published report ID if the API temporarily omits it."""
     result = {}
@@ -130,6 +140,7 @@ def build_calendar(api, outfile, calendar_name):
             report_url = f'https://spo.handball4all.de/misc/sboPublicReports.php?sGID={sbo_id}'
             description += f"\nSpielbericht (PDF): {report_url}"
             event_lines.append(f'URL:{report_url}')
+            event_lines.extend(fold_ascii_line(f'ATTACH;FMTTYPE=application/pdf:{report_url}'))
         else:
             description += '\nSpielbericht (PDF): wird ergänzt, sobald Handball4all ihn bereitstellt.'
 
