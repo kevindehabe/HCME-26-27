@@ -14,7 +14,7 @@ Auf dem iPhone: Kalender → Kalender → Kalender hinzufügen → Kalenderabonn
 
 ## Automatische Aktualisierung
 
-GitHub Actions ist für Aktualisierungen alle fünf Minuten eingerichtet (jeweils ab Minute 2). Beide Kalender werden unabhängig voneinander erzeugt. Sobald Handball4all für ein Spiel eine SBO-/Liveticker-ID veröffentlicht, wird der Liveticker automatisch in den Termin übernommen. IDs aus bereits veröffentlichten Kalendereinträgen bleiben erhalten, falls eine API-Antwort sie vorübergehend nicht enthält.
+GitHub Actions ist für Aktualisierungen alle fünf Minuten eingerichtet (jeweils ab Minute 2). Beide Kalender werden unabhängig voneinander erzeugt. Sobald Handball4all für ein Spiel eine SBO-ID veröffentlicht, wird der PDF-Spielbericht im Termin verlinkt. Der Link bleibt nach dem Spiel erhalten; IDs aus bereits veröffentlichten Kalendereinträgen bleiben erhalten, falls eine API-Antwort sie vorübergehend nicht enthält. Der PDF-Link ist kein Liveticker. Ein verlässlicher Link zum Liveticker für diese Spiele liegt derzeit nicht vor.
 
 Für einen zusätzlichen, kostenlosen Fünf-Minuten-Auslöser lässt sich auf https://cron-job.org ein HTTP-Job einrichten. Er startet denselben GitHub-Workflow; das bestehende Kalenderabo bleibt gleich. Einstellungen:
 
