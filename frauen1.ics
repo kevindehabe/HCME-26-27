@@ -10,7 +10,7 @@ DTSTART;TZID=Europe/Berlin:20261010T180000
 DTEND;TZID=Europe/Berlin:20261010T200000
 SUMMARY:BBM Bietigheim 2 – HC Metter-Enz
 LOCATION:Sporthalle am Viadukt\, Holzgartenstraße 28\, 74321 Bietigheim-Bissingen
-DESCRIPTION:Spielnummer 100712\nLiveticker: wird automatisch ergänzt\, sobald Handball4all ihn freigibt.
+DESCRIPTION:Spielnummer 100712\nSpielbericht (PDF): wird ergänzt\, sobald Handball4all ihn bereitstellt.
 END:VEVENT
 BEGIN:VEVENT
 UID:9450766@handball4all.de
@@ -18,7 +18,7 @@ DTSTART;TZID=Europe/Berlin:20261017T141500
 DTEND;TZID=Europe/Berlin:20261017T161500
 SUMMARY:HC Metter-Enz – TV Flein 2
 LOCATION:Kaltensteinhalle\, Alter Postweg 10\, 71665 Vaihingen/Enz
-DESCRIPTION:Spielnummer 100738\nLiveticker: wird automatisch ergänzt\, sobald Handball4all ihn freigibt.
+DESCRIPTION:Spielnummer 100738\nSpielbericht (PDF): wird ergänzt\, sobald Handball4all ihn bereitstellt.
 END:VEVENT
 BEGIN:VEVENT
 UID:9450656@handball4all.de
@@ -26,7 +26,7 @@ DTSTART;TZID=Europe/Berlin:20261024T160000
 DTEND;TZID=Europe/Berlin:20261024T180000
 SUMMARY:HB Ludwigsburg 2 – HC Metter-Enz
 LOCATION:Hermann-Batz-Halle\, Tammer Straße 20\, 71634 Ludwigsburg-Eglosheim
-DESCRIPTION:Spielnummer 100716\nLiveticker: wird automatisch ergänzt\, sobald Handball4all ihn freigibt.
+DESCRIPTION:Spielnummer 100716\nSpielbericht (PDF): wird ergänzt\, sobald Handball4all ihn bereitstellt.
 END:VEVENT
 BEGIN:VEVENT
 UID:9450691@handball4all.de
@@ -34,7 +34,7 @@ DTSTART;TZID=Europe/Berlin:20261107T163000
 DTEND;TZID=Europe/Berlin:20261107T183000
 SUMMARY:HSG Heilbronn 2 – HC Metter-Enz
 LOCATION:Leintalsporthalle\, Würzburger Straße\, 74078 Heilbronn-Frankenbach
-DESCRIPTION:Spielnummer 100723\nLiveticker: wird automatisch ergänzt\, sobald Handball4all ihn freigibt.
+DESCRIPTION:Spielnummer 100723\nSpielbericht (PDF): wird ergänzt\, sobald Handball4all ihn bereitstellt.
 END:VEVENT
 BEGIN:VEVENT
 UID:9450706@handball4all.de
@@ -42,7 +42,7 @@ DTSTART;TZID=Europe/Berlin:20261114T200000
 DTEND;TZID=Europe/Berlin:20261114T220000
 SUMMARY:HC Metter-Enz – TSV Hardth.
 LOCATION:Kaltensteinhalle\, Alter Postweg 10\, 71665 Vaihingen/Enz
-DESCRIPTION:Spielnummer 100726\nLiveticker: wird automatisch ergänzt\, sobald Handball4all ihn freigibt.
+DESCRIPTION:Spielnummer 100726\nSpielbericht (PDF): wird ergänzt\, sobald Handball4all ihn bereitstellt.
 END:VEVENT
 BEGIN:VEVENT
 UID:9450736@handball4all.de
@@ -50,7 +50,7 @@ DTSTART;TZID=Europe/Berlin:20261121T180000
 DTEND;TZID=Europe/Berlin:20261121T200000
 SUMMARY:HC Metter-Enz – TSV Asperg
 LOCATION:Sporthalle Großsachsenheim\, Oberriexingerstraße 33-35\, 74343 Sachsenheim-Großsachsenheim
-DESCRIPTION:Spielnummer 100732\nLiveticker: wird automatisch ergänzt\, sobald Handball4all ihn freigibt.
+DESCRIPTION:Spielnummer 100732\nSpielbericht (PDF): wird ergänzt\, sobald Handball4all ihn bereitstellt.
 END:VEVENT
 BEGIN:VEVENT
 UID:9450741@handball4all.de
@@ -58,7 +58,7 @@ DTSTART;TZID=Europe/Berlin:20261128T200000
 DTEND;TZID=Europe/Berlin:20261128T220000
 SUMMARY:SG Heuchelb. – HC Metter-Enz
 LOCATION:Eichbotthalle\, Schwaigerner Str. 45\, 74211 Leingarten
-DESCRIPTION:Spielnummer 100733\nLiveticker: wird automatisch ergänzt\, sobald Handball4all ihn freigibt.
+DESCRIPTION:Spielnummer 100733\nSpielbericht (PDF): wird ergänzt\, sobald Handball4all ihn bereitstellt.
 END:VEVENT
 BEGIN:VEVENT
 UID:9450791@handball4all.de
@@ -66,7 +66,7 @@ DTSTART;TZID=Europe/Berlin:20261213T150000
 DTEND;TZID=Europe/Berlin:20261213T170000
 SUMMARY:SU Neckarsulm 3 – HC Metter-Enz
 LOCATION:Sulmhalle\, Saarstraße 20\, 74172 Neckarsulm
-DESCRIPTION:Spielnummer 100743\nLiveticker: wird automatisch ergänzt\, sobald Handball4all ihn freigibt.
+DESCRIPTION:Spielnummer 100743\nSpielbericht (PDF): wird ergänzt\, sobald Handball4all ihn bereitstellt.
 END:VEVENT
 BEGIN:VEVENT
 UID:9450966@handball4all.de
@@ -74,7 +74,7 @@ DTSTART;TZID=Europe/Berlin:20270109T180000
 DTEND;TZID=Europe/Berlin:20270109T200000
 SUMMARY:HC Metter-Enz – SG Heuchelb.
 LOCATION:Kaltensteinhalle\, Alter Postweg 10\, 71665 Vaihingen/Enz
-DESCRIPTION:Spielnummer 100778\nLiveticker: wird automatisch ergänzt\, sobald Handball4all ihn freigibt.
+DESCRIPTION:Spielnummer 100778\nSpielbericht (PDF): wird ergänzt\, sobald Handball4all ihn bereitstellt.
 END:VEVENT
 BEGIN:VEVENT
 UID:9450826@handball4all.de
@@ -82,7 +82,7 @@ DTSTART;TZID=Europe/Berlin:20270123T180000
 DTEND;TZID=Europe/Berlin:20270123T200000
 SUMMARY:HC Metter-Enz – TV Mosbach
 LOCATION:Kaltensteinhalle\, Alter Postweg 10\, 71665 Vaihingen/Enz
-DESCRIPTION:Spielnummer 100750\nLiveticker: wird automatisch ergänzt\, sobald Handball4all ihn freigibt.
+DESCRIPTION:Spielnummer 100750\nSpielbericht (PDF): wird ergänzt\, sobald Handball4all ihn bereitstellt.
 END:VEVENT
 BEGIN:VEVENT
 UID:9450601@handball4all.de
@@ -90,7 +90,7 @@ DTSTART;TZID=Europe/Berlin:20270130T200000
 DTEND;TZID=Europe/Berlin:20270130T220000
 SUMMARY:TV Mosbach – HC Metter-Enz
 LOCATION:Jahnhalle\, Hammerweg 7\, 74821 Mosbach
-DESCRIPTION:Spielnummer 100705\nLiveticker: wird automatisch ergänzt\, sobald Handball4all ihn freigibt.
+DESCRIPTION:Spielnummer 100705\nSpielbericht (PDF): wird ergänzt\, sobald Handball4all ihn bereitstellt.
 END:VEVENT
 BEGIN:VEVENT
 UID:9450861@handball4all.de
@@ -98,7 +98,7 @@ DTSTART;TZID=Europe/Berlin:20270220T180000
 DTEND;TZID=Europe/Berlin:20270220T200000
 SUMMARY:HC Metter-Enz – BBM Bietigheim 2
 LOCATION:Kaltensteinhalle\, Alter Postweg 10\, 71665 Vaihingen/Enz
-DESCRIPTION:Spielnummer 100757\nLiveticker: wird automatisch ergänzt\, sobald Handball4all ihn freigibt.
+DESCRIPTION:Spielnummer 100757\nSpielbericht (PDF): wird ergänzt\, sobald Handball4all ihn bereitstellt.
 END:VEVENT
 BEGIN:VEVENT
 UID:9450881@handball4all.de
@@ -106,7 +106,7 @@ DTSTART;TZID=Europe/Berlin:20270306T180000
 DTEND;TZID=Europe/Berlin:20270306T200000
 SUMMARY:HC Metter-Enz – HB Ludwigsburg 2
 LOCATION:Sporthalle Großsachsenheim\, Oberriexingerstraße 33-35\, 74343 Sachsenheim-Großsachsenheim
-DESCRIPTION:Spielnummer 100761\nLiveticker: wird automatisch ergänzt\, sobald Handball4all ihn freigibt.
+DESCRIPTION:Spielnummer 100761\nSpielbericht (PDF): wird ergänzt\, sobald Handball4all ihn bereitstellt.
 END:VEVENT
 BEGIN:VEVENT
 UID:9450916@handball4all.de
@@ -114,7 +114,7 @@ DTSTART;TZID=Europe/Berlin:20270320T190000
 DTEND;TZID=Europe/Berlin:20270320T210000
 SUMMARY:HC Metter-Enz – HSG Heilbronn 2
 LOCATION:Kaltensteinhalle\, Alter Postweg 10\, 71665 Vaihingen/Enz
-DESCRIPTION:Spielnummer 100768\nLiveticker: wird automatisch ergänzt\, sobald Handball4all ihn freigibt.
+DESCRIPTION:Spielnummer 100768\nSpielbericht (PDF): wird ergänzt\, sobald Handball4all ihn bereitstellt.
 END:VEVENT
 BEGIN:VEVENT
 UID:9450931@handball4all.de
@@ -122,7 +122,7 @@ DTSTART;TZID=Europe/Berlin:20270403T190000
 DTEND;TZID=Europe/Berlin:20270403T210000
 SUMMARY:TSV Hardth. – HC Metter-Enz
 LOCATION:BUchsBAchtalHalle\, Buchssteige\, 74239 Hardthausen
-DESCRIPTION:Spielnummer 100771\nLiveticker: wird automatisch ergänzt\, sobald Handball4all ihn freigibt.
+DESCRIPTION:Spielnummer 100771\nSpielbericht (PDF): wird ergänzt\, sobald Handball4all ihn bereitstellt.
 END:VEVENT
 BEGIN:VEVENT
 UID:9450961@handball4all.de
@@ -130,7 +130,7 @@ DTSTART;TZID=Europe/Berlin:20270410T150000
 DTEND;TZID=Europe/Berlin:20270410T170000
 SUMMARY:TSV Asperg – HC Metter-Enz
 LOCATION:Rundsporthalle\, Paul-Klee-Straße 11\, 71679 Asperg
-DESCRIPTION:Spielnummer 100777\nLiveticker: wird automatisch ergänzt\, sobald Handball4all ihn freigibt.
+DESCRIPTION:Spielnummer 100777\nSpielbericht (PDF): wird ergänzt\, sobald Handball4all ihn bereitstellt.
 END:VEVENT
 BEGIN:VEVENT
 UID:9451016@handball4all.de
@@ -138,7 +138,7 @@ DTSTART;TZID=Europe/Berlin:20270417T180000
 DTEND;TZID=Europe/Berlin:20270417T200000
 SUMMARY:HC Metter-Enz – SU Neckarsulm 3
 LOCATION:Sporthalle Großsachsenheim\, Oberriexingerstraße 33-35\, 74343 Sachsenheim-Großsachsenheim
-DESCRIPTION:Spielnummer 100788\nLiveticker: wird automatisch ergänzt\, sobald Handball4all ihn freigibt.
+DESCRIPTION:Spielnummer 100788\nSpielbericht (PDF): wird ergänzt\, sobald Handball4all ihn bereitstellt.
 END:VEVENT
 BEGIN:VEVENT
 UID:9450991@handball4all.de
@@ -146,6 +146,6 @@ DTSTART;TZID=Europe/Berlin:20270424T160000
 DTEND;TZID=Europe/Berlin:20270424T180000
 SUMMARY:TV Flein 2 – HC Metter-Enz
 LOCATION:Sandberghalle\, Talheimer Straße\, 74223 Flein
-DESCRIPTION:Spielnummer 100783\nLiveticker: wird automatisch ergänzt\, sobald Handball4all ihn freigibt.
+DESCRIPTION:Spielnummer 100783\nSpielbericht (PDF): wird ergänzt\, sobald Handball4all ihn bereitstellt.
 END:VEVENT
 END:VCALENDAR
