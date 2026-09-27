@@ -19,7 +19,8 @@ DTSTART;TZID=Europe/Berlin:20260927T173000
 DTEND;TZID=Europe/Berlin:20260927T193000
 SUMMARY:TSV Korntal – HC Metter-Enz
 LOCATION:Sporthalle Korntal\, Martin-Luther-Straße 32\, 70825 Korntal-Münchingen
-DESCRIPTION:Spielnummer 100139\nLiveticker: wird automatisch ergänzt\, sobald Handball4all ihn freigibt.
+URL:https://spo.handball4all.de/misc/sboPublicReports.php?sGID=3511626
+DESCRIPTION:Spielnummer 100139\nLiveticker: https://spo.handball4all.de/misc/sboPublicReports.php?sGID=3511626
 END:VEVENT
 BEGIN:VEVENT
 UID:9448631@handball4all.de

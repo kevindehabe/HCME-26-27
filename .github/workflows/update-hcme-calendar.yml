@@ -2,7 +2,7 @@ name: Update HCME calendars
 
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '17 */2 * * *'
   workflow_dispatch:
   push:
     paths:
@@ -14,7 +14,7 @@ permissions:
 
 concurrency:
   group: hcme-calendar-update
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   update:
