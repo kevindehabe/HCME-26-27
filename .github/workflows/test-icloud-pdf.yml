@@ -1,0 +1,37 @@
+name: iCloud PDF-Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Verbindung prüfen oder einen PDF-Testtermin anlegen
+        required: true
+        default: check
+        type: choice
+        options:
+          - check
+          - upload-test
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hcme-icloud-pdf-test
+  cancel-in-progress: false
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: iCloud-Verbindung und PDF-Anhang prüfen
+        env:
+          ICLOUD_USERNAME: ${{ secrets.ICLOUD_USERNAME }}
+          ICLOUD_APP_PASSWORD: ${{ secrets.ICLOUD_APP_PASSWORD }}
+          ICLOUD_CALENDAR_NAME: HCME PDF Test
+          ICLOUD_TEST_MODE: ${{ inputs.mode }}
+        run: python icloud_pdf_test.py --mode "$ICLOUD_TEST_MODE"
