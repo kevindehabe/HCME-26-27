@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
+import base64
 import json
 import re
 import time
 import urllib.request
 from datetime import datetime, timedelta
+from pathlib import Path
 from zoneinfo import ZoneInfo
 
 TZ = ZoneInfo('Europe/Berlin')
@@ -67,11 +69,37 @@ def valid_sgid(value):
 def fold_ascii_line(value):
     """Fold an ASCII iCalendar property at the 75-octet line limit."""
     chunks = [value[:75]]
-    value = value[75:]
-    while value:
-        chunks.append(' ' + value[:74])
-        value = value[74:]
+    for offset in range(75, len(value), 74):
+        chunks.append(' ' + value[offset:offset + 74])
     return chunks
+
+
+def finished_game(game):
+    return bool(re.fullmatch(r'\d+', str(game.get('gHomeGoals', '')).strip())
+                and re.fullmatch(r'\d+', str(game.get('gGuestGoals', '')).strip()))
+
+
+def pdf_attachment(game_id, game_number, report_url):
+    """Embed a real PDF, downloading it only once per game to the repo cache."""
+    reports_dir = Path('reports')
+    reports_dir.mkdir(exist_ok=True)
+    path = reports_dir / f'{game_id}.pdf'
+    if not path.is_file():
+        request = urllib.request.Request(report_url, headers={'User-Agent': 'HCME-calendar/1.0'})
+        with urllib.request.urlopen(request, timeout=30) as response:
+            pdf = response.read(2_000_001)
+        if len(pdf) > 2_000_000 or not pdf.startswith(b'%PDF-'):
+            raise ValueError(f'Kein gültiger PDF-Spielbericht für Spiel {game_id}')
+        path.write_bytes(pdf)
+    else:
+        pdf = path.read_bytes()
+        if not pdf.startswith(b'%PDF-'):
+            raise ValueError(f'Ungültiger gespeicherter Spielbericht für Spiel {game_id}')
+    encoded = base64.b64encode(pdf).decode('ascii')
+    name = f'Spielbericht_{game_number}.pdf'
+    return fold_ascii_line(
+        f'ATTACH;FMTTYPE=application/pdf;FILENAME={name};ENCODING=BASE64;VALUE=BINARY:{encoded}'
+    )
 
 
 def existing_report_ids(outfile):
@@ -139,7 +167,11 @@ def build_calendar(api, outfile, calendar_name):
         if sbo_id:
             report_url = f'https://spo.handball4all.de/misc/sboPublicReports.php?sGID={sbo_id}'
             description += f"\nSpielbericht (PDF): {report_url}"
-            event_lines.extend(fold_ascii_line(f'ATTACH;FMTTYPE=application/pdf:{report_url}'))
+            if finished_game(g):
+                try:
+                    event_lines.extend(pdf_attachment(str(g['gID']), str(g.get('gNo', g['gID'])), report_url))
+                except Exception as exc:
+                    print(f"Spiel {g['gID']}: PDF-Anhang vorübergehend nicht verfügbar: {exc}")
         else:
             description += '\nSpielbericht (PDF): wird ergänzt, sobald Handball4all ihn bereitstellt.'
 
