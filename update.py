@@ -59,9 +59,8 @@ def games_from_response(data):
                 games_by_id[game_id] = game
                 continue
 
-            # Keep the richer version of the same game. During a live game the
-            # ticker token can appear in actualGames while the game is also
-            # still present elsewhere in the response.
+            # A live game can appear in more than one section. Keep ticker/report
+            # identifiers if either copy already contains them.
             if not valid_sgid(previous.get('sGID')) and valid_sgid(game.get('sGID')):
                 previous['sGID'] = game.get('sGID')
             if not valid_token(previous.get('gToken')) and valid_token(game.get('gToken')):
