@@ -139,96 +139,7 @@ def existing_ticker_tokens(outfile):
     except FileNotFoundError:
         return result
     for event in calendar.split('BEGIN:VEVENT')[1:]:
-        uid = re.search(r'^UID:([0-9]+)@handball4all\.de\r?
-    lines = [
-        'BEGIN:VCALENDAR',
-        'VERSION:2.0',
-        'PRODID:-//HC Metter-Enz//H4A Auto Calendar//DE',
-        'CALSCALE:GREGORIAN',
-        'METHOD:PUBLISH',
-        f'X-WR-CALNAME:{esc(calendar_name)}',
-    ]
-
-    count = 0
-    for g in games:
-        if TEAM not in (g.get('gHomeTeam', ''), g.get('gGuestTeam', '')):
-            continue
-
-        start = datetime.strptime(
-            g['gDate'] + ' ' + g['gTime'], '%d.%m.%y %H:%M'
-        ).replace(tzinfo=TZ)
-        end = start + timedelta(hours=2)
-
-        loc = ', '.join(
-            x for x in [
-                g.get('gGymnasiumName', ''),
-                g.get('gGymnasiumStreet', ''),
-                (g.get('gGymnasiumPostal', '') + ' ' + g.get('gGymnasiumTown', '')).strip(),
-            ] if x
-        )
-
-        summary = f"{g.get('gHomeTeam', '')} – {g.get('gGuestTeam', '')}"
-        description = f"Spielnummer {g.get('gNo', '')}"
-
-        ticker_token = str(g.get('gToken', '')).strip()
-        if not valid_token(ticker_token):
-            ticker_token = saved_tickers.get(str(g['gID']), '')
-        if ticker_token:
-            ticker_url = (
-                'https://spo.handball4all.de/service/ticker/'
-                f'index.html?token={ticker_token}'
-            )
-            description += f"\nLiveticker: {ticker_url}"
-
-        sbo_id = str(g.get('sGID', '')).strip()
-        if not valid_sgid(sbo_id):
-            sbo_id = saved_reports.get(str(g['gID']), '')
-
-        event_lines = [
-            'BEGIN:VEVENT',
-            f"UID:{g['gID']}@handball4all.de",
-            f"DTSTART;TZID=Europe/Berlin:{start.strftime('%Y%m%dT%H%M%S')}",
-            f"DTEND;TZID=Europe/Berlin:{end.strftime('%Y%m%dT%H%M%S')}",
-            f"SUMMARY:{esc(summary)}",
-            f"LOCATION:{esc(loc)}",
-        ]
-
-        if sbo_id:
-            report_url = f'https://spo.handball4all.de/misc/sboPublicReports.php?sGID={sbo_id}'
-            description += f"\nSpielbericht (PDF): {report_url}"
-            if finished_game(g):
-                try:
-                    event_lines.extend(pdf_attachment(str(g['gID']), str(g.get('gNo', g['gID'])), report_url))
-                except Exception as exc:
-                    print(f"Spiel {g['gID']}: PDF-Anhang vorübergehend nicht verfügbar: {exc}")
-        else:
-            description += '\nSpielbericht (PDF): wird ergänzt, sobald Handball4all ihn bereitstellt.'
-
-        event_lines += [
-            f'DESCRIPTION:{esc(description)}',
-            'END:VEVENT',
-        ]
-        lines += event_lines
-        count += 1
-
-    lines.append('END:VCALENDAR')
-    with open(outfile, 'w', encoding='utf-8', newline='') as f:
-        f.write('\r\n'.join(lines) + '\r\n')
-
-    print(f'{outfile}: {count} zukünftige HCME-Spiele aktualisiert')
-
-
-if __name__ == '__main__':
-    updated = 0
-    for calendar in CALENDARS:
-        try:
-            build_calendar(calendar['api'], calendar['file'], calendar['name'])
-            updated += 1
-        except Exception as exc:
-            print(f"{calendar['file']}: Aktualisierung fehlgeschlagen: {exc}")
-    if not updated:
-        raise SystemExit('Keine Kalender aktualisiert')
-, event, re.MULTILINE)
+        uid = re.search(r'^UID:([0-9]+)@handball4all\.de\r?$', event, re.MULTILINE)
         ticker = re.search(
             r'https://spo\.handball4all\.de/service/ticker/index\.html\?token=([A-Za-z0-9_-]+)',
             event,
@@ -272,6 +183,17 @@ def build_calendar(api, outfile, calendar_name):
 
         summary = f"{g.get('gHomeTeam', '')} – {g.get('gGuestTeam', '')}"
         description = f"Spielnummer {g.get('gNo', '')}"
+
+        ticker_token = str(g.get('gToken', '')).strip()
+        if not valid_token(ticker_token):
+            ticker_token = saved_tickers.get(str(g['gID']), '')
+        if ticker_token:
+            ticker_url = (
+                'https://spo.handball4all.de/service/ticker/'
+                f'index.html?token={ticker_token}'
+            )
+            description += f"\nLiveticker: {ticker_url}"
+
         sbo_id = str(g.get('sGID', '')).strip()
         if not valid_sgid(sbo_id):
             sbo_id = saved_reports.get(str(g['gID']), '')
