@@ -11,6 +11,13 @@ from zoneinfo import ZoneInfo
 TZ = ZoneInfo('Europe/Berlin')
 TEAM = 'HC Metter-Enz'
 
+# GitHub Actions runs every five minutes. If a match is about to start, keep
+# that run alive and poll Handball4all so the ticker link is published almost
+# immediately when gToken appears.
+TICKER_WATCH_BEFORE = timedelta(minutes=5)
+TICKER_WATCH_AFTER = timedelta(minutes=8)
+TICKER_POLL_SECONDS = 15
+
 CALENDARS = [
     {
         'api': 'https://spo.handball4all.de/service/if_g_json.php?ca=0&cl=161551&cmd=ps&ct=1451606&og=216',
@@ -76,6 +83,52 @@ def valid_sgid(value):
 
 def valid_token(value):
     return bool(re.fullmatch(r'[A-Za-z0-9_-]{16,128}', str(value or '').strip()))
+
+
+def game_start(game):
+    return datetime.strptime(
+        game['gDate'] + ' ' + game['gTime'], '%d.%m.%y %H:%M'
+    ).replace(tzinfo=TZ)
+
+
+def watch_for_starting_ticker(api, games, saved_tickers):
+    """Poll around kickoff until Handball4all publishes gToken."""
+    now = datetime.now(TZ)
+    candidates = []
+
+    for game in games:
+        if TEAM not in (game.get('gHomeTeam', ''), game.get('gGuestTeam', '')):
+            continue
+        game_id = str(game.get('gID', ''))
+        if valid_token(game.get('gToken')) or valid_token(saved_tickers.get(game_id)):
+            continue
+
+        start = game_start(game)
+        if start - TICKER_WATCH_BEFORE <= now <= start + TICKER_WATCH_AFTER:
+            candidates.append((game_id, start))
+
+    if not candidates:
+        return games
+
+    candidate_ids = {game_id for game_id, _ in candidates}
+    deadline = max(start + TICKER_WATCH_AFTER for _, start in candidates)
+
+    while datetime.now(TZ) <= deadline:
+        for game in games:
+            if str(game.get('gID', '')) in candidate_ids and valid_token(game.get('gToken')):
+                print(f"Spiel {game.get('gNo', game.get('gID'))}: Liveticker-Token gefunden")
+                return games
+
+        remaining = (deadline - datetime.now(TZ)).total_seconds()
+        if remaining <= 0:
+            break
+
+        wait = min(TICKER_POLL_SECONDS, remaining)
+        print(f'Liveticker noch nicht verfügbar; neuer Versuch in {int(wait)} Sekunden')
+        time.sleep(wait)
+        games = games_from_response(fetch_json(api))
+
+    return games
 
 
 def fold_ascii_line(value):
@@ -153,6 +206,7 @@ def build_calendar(api, outfile, calendar_name):
     games = games_from_response(fetch_json(api))
     saved_reports = existing_report_ids(outfile)
     saved_tickers = existing_ticker_tokens(outfile)
+    games = watch_for_starting_ticker(api, games, saved_tickers)
 
     lines = [
         'BEGIN:VCALENDAR',
@@ -168,9 +222,7 @@ def build_calendar(api, outfile, calendar_name):
         if TEAM not in (g.get('gHomeTeam', ''), g.get('gGuestTeam', '')):
             continue
 
-        start = datetime.strptime(
-            g['gDate'] + ' ' + g['gTime'], '%d.%m.%y %H:%M'
-        ).replace(tzinfo=TZ)
+        start = game_start(g)
         end = start + timedelta(hours=2)
 
         loc = ', '.join(
