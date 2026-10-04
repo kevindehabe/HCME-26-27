@@ -245,6 +245,8 @@ def build_calendar(api, outfile, calendar_name):
                 f'index.html?token={ticker_token}'
             )
             description += f"\nLiveticker: {ticker_url}"
+        else:
+            description += "\nLiveticker: wird zum Spielstart ergänzt."
 
         sbo_id = str(g.get('sGID', '')).strip()
         if not valid_sgid(sbo_id):
