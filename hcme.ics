@@ -5218,7 +5218,7 @@ DTSTART;TZID=Europe/Berlin:20261010T153000
 DTEND;TZID=Europe/Berlin:20261010T173000
 SUMMARY:HSG Marb/Riel – HC Metter-Enz
 LOCATION:Stadionhalle\, Am Leiselstein 4\, 71672 Marbach/Neckar
-DESCRIPTION:Spielnummer 100147\nLiveticker: wird zum Spielstart ergänzt.\nSpielbericht (PDF): wird ergänzt\, sobald Handball4all ihn bereitstellt.
+DESCRIPTION:Spielnummer 100147\nLiveticker: https://spo.handball4all.de/service/ticker/index.html?token=4505e9bc90c13b8a19f3d191072cf085\nSpielbericht (PDF): wird ergänzt\, sobald Handball4all ihn bereitstellt.
 END:VEVENT
 BEGIN:VEVENT
 UID:9448651@handball4all.de
