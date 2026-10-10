@@ -10,7 +10,7 @@ DTSTART;TZID=Europe/Berlin:20261010T180000
 DTEND;TZID=Europe/Berlin:20261010T200000
 SUMMARY:BBM Bietigheim 2 – HC Metter-Enz
 LOCATION:Sporthalle am Viadukt\, Holzgartenstraße 28\, 74321 Bietigheim-Bissingen
-DESCRIPTION:Spielnummer 100712\nLiveticker: wird zum Spielstart ergänzt.\nSpielbericht (PDF): wird ergänzt\, sobald Handball4all ihn bereitstellt.
+DESCRIPTION:Spielnummer 100712\nLiveticker: https://spo.handball4all.de/service/ticker/index.html?token=6278c813a7818ec867b5ee8accaef18a\nSpielbericht (PDF): wird ergänzt\, sobald Handball4all ihn bereitstellt.
 END:VEVENT
 BEGIN:VEVENT
 UID:9450766@handball4all.de
