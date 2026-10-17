@@ -6,6 +6,7 @@ import time
 import urllib.request
 from datetime import datetime, timedelta
 from pathlib import Path
+from urllib.parse import parse_qs, urlencode, urlsplit
 from zoneinfo import ZoneInfo
 
 TZ = ZoneInfo('Europe/Berlin')
@@ -17,6 +18,9 @@ TEAM = 'HC Metter-Enz'
 TICKER_WATCH_BEFORE = timedelta(minutes=5)
 TICKER_WATCH_AFTER = timedelta(minutes=8)
 TICKER_POLL_SECONDS = 15
+TICKER_LOOKUP_BEFORE = timedelta(minutes=15)
+TICKER_LOOKUP_AFTER = timedelta(hours=3)
+TICKER_SECONDARY_POLL_SECONDS = 60
 
 CALENDARS = [
     {
@@ -91,18 +95,90 @@ def game_start(game):
     ).replace(tzinfo=TZ)
 
 
-def watch_for_starting_ticker(api, games, saved_tickers):
-    """Poll around kickoff until Handball4all publishes gToken."""
-    now = datetime.now(TZ)
-    candidates = []
+def ticker_tokens_in_response(data, candidate_ids):
+    """Find gToken for exactly the requested gID, also in nested club/area views."""
+    found = {}
 
+    def walk(node):
+        if isinstance(node, dict):
+            game_id = str(node.get('gID', ''))
+            token = str(node.get('gToken') or '').strip()
+            if game_id in candidate_ids and valid_token(token):
+                found[game_id] = token
+            for value in node.values():
+                if isinstance(value, (dict, list)):
+                    walk(value)
+        elif isinstance(node, list):
+            for value in node:
+                walk(value)
+
+    walk(data)
+    return found
+
+
+def secondary_ticker_urls(api, dates):
+    """Other official Handball4all views for the same league and match week."""
+    parsed = urlsplit(api)
+    params = parse_qs(parsed.query)
+    league = params.get('cl', [None])[0]
+    org = params.get('og', [None])[0]
+    if not league or not org:
+        return []
+
+    base = f'{parsed.scheme}://{parsed.netloc}{parsed.path}'
+    urls = [base + '?' + urlencode({'cmd': 'ps', 'og': org, 'cl': league, 'ca': 1})]
+    urls.extend(
+        base + '?' + urlencode({'cmd': 'po', 'og': org, 'do': match_date})
+        for match_date in sorted(set(dates))
+    )
+    return urls
+
+
+def recover_ticker_tokens(api, games, saved_tickers, now=None):
+    """Look beyond the filtered team view while the game is on."""
+    now = now or datetime.now(TZ)
+    candidates = {}
     for game in games:
         if TEAM not in (game.get('gHomeTeam', ''), game.get('gGuestTeam', '')):
             continue
         game_id = str(game.get('gID', ''))
         if valid_token(game.get('gToken')) or valid_token(saved_tickers.get(game_id)):
             continue
+        start = game_start(game)
+        if start - TICKER_LOOKUP_BEFORE <= now <= start + TICKER_LOOKUP_AFTER:
+            candidates[game_id] = game
 
+    if not candidates:
+        return games
+
+    dates = [game_start(g).date().isoformat() for g in candidates.values()]
+    for url in secondary_ticker_urls(api, dates):
+        try:
+            found = ticker_tokens_in_response(fetch_json(url, attempts=1), set(candidates))
+        except Exception as exc:
+            print(f'Alternative Liveticker-Abfrage fehlgeschlagen: {exc}')
+            continue
+
+        for game_id, token in found.items():
+            candidates[game_id]['gToken'] = token
+            print(f'Spiel {game_id}: Liveticker-Token aus alternativer Handball4all-Ansicht')
+            del candidates[game_id]
+        if not candidates:
+            break
+
+    return games
+
+
+def watch_for_starting_ticker(api, games, saved_tickers):
+    """Watch kickoff briefly; scheduled runs keep searching for 3 hours."""
+    now = datetime.now(TZ)
+    candidates = []
+    for game in games:
+        if TEAM not in (game.get('gHomeTeam', ''), game.get('gGuestTeam', '')):
+            continue
+        game_id = str(game.get('gID', ''))
+        if valid_token(game.get('gToken')) or valid_token(saved_tickers.get(game_id)):
+            continue
         start = game_start(game)
         if start - TICKER_WATCH_BEFORE <= now <= start + TICKER_WATCH_AFTER:
             candidates.append((game_id, start))
@@ -112,11 +188,29 @@ def watch_for_starting_ticker(api, games, saved_tickers):
 
     candidate_ids = {game_id for game_id, _ in candidates}
     deadline = max(start + TICKER_WATCH_AFTER for _, start in candidates)
+    last_secondary_check = None
+    discovered = {}
 
     while datetime.now(TZ) <= deadline:
         for game in games:
-            if str(game.get('gID', '')) in candidate_ids and valid_token(game.get('gToken')):
-                print(f"Spiel {game.get('gNo', game.get('gID'))}: Liveticker-Token gefunden")
+            game_id = str(game.get('gID', ''))
+            token = str(game.get('gToken') or '').strip()
+            if game_id in candidate_ids and valid_token(token):
+                discovered[game_id] = token
+        if candidate_ids <= discovered.keys():
+            return games
+
+        now = datetime.now(TZ)
+        if (last_secondary_check is None
+                or (now - last_secondary_check).total_seconds() >= TICKER_SECONDARY_POLL_SECONDS):
+            games = recover_ticker_tokens(api, games, {**saved_tickers, **discovered}, now)
+            last_secondary_check = datetime.now(TZ)
+            for game in games:
+                game_id = str(game.get('gID', ''))
+                token = str(game.get('gToken') or '').strip()
+                if game_id in candidate_ids and valid_token(token):
+                    discovered[game_id] = token
+            if candidate_ids <= discovered.keys():
                 return games
 
         remaining = (deadline - datetime.now(TZ)).total_seconds()
@@ -126,7 +220,15 @@ def watch_for_starting_ticker(api, games, saved_tickers):
         wait = min(TICKER_POLL_SECONDS, remaining)
         print(f'Liveticker noch nicht verfügbar; neuer Versuch in {int(wait)} Sekunden')
         time.sleep(wait)
-        games = games_from_response(fetch_json(api))
+        try:
+            games = games_from_response(fetch_json(api))
+        except Exception as exc:
+            print(f'Liveticker-Abfrage vorübergehend fehlgeschlagen: {exc}')
+            continue
+        for game in games:
+            game_id = str(game.get('gID', ''))
+            if game_id in discovered and not valid_token(game.get('gToken')):
+                game['gToken'] = discovered[game_id]
 
     return games
 
@@ -206,6 +308,7 @@ def build_calendar(api, outfile, calendar_name):
     games = games_from_response(fetch_json(api))
     saved_reports = existing_report_ids(outfile)
     saved_tickers = existing_ticker_tokens(outfile)
+    games = recover_ticker_tokens(api, games, saved_tickers)
     games = watch_for_starting_ticker(api, games, saved_tickers)
 
     lines = [
