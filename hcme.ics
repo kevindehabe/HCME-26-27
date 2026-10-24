@@ -10388,7 +10388,7 @@ DTSTART;TZID=Europe/Berlin:20261024T140000
 DTEND;TZID=Europe/Berlin:20261024T160000
 SUMMARY:HB Ludwigsburg 3 – HC Metter-Enz
 LOCATION:Hermann-Batz-Halle\, Tammer Straße 20\, 71634 Ludwigsburg-Eglosheim
-DESCRIPTION:Spielnummer 100156\nLiveticker: wird zum Spielstart ergänzt.\nSpielbericht (PDF): wird ergänzt\, sobald Handball4all ihn bereitstellt.
+DESCRIPTION:Spielnummer 100156\nLiveticker: https://spo.handball4all.de/service/ticker/index.html?token=01d42afe87025fa4d8ac7dc4856bab0a\nSpielbericht (PDF): wird ergänzt\, sobald Handball4all ihn bereitstellt.
 END:VEVENT
 BEGIN:VEVENT
 UID:9448686@handball4all.de
