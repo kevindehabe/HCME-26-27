@@ -12976,7 +12976,7 @@ DTSTART;TZID=Europe/Berlin:20261031T190000
 DTEND;TZID=Europe/Berlin:20261031T210000
 SUMMARY:HC Metter-Enz – TV Tamm
 LOCATION:Sporthalle Großsachsenheim\, Oberriexingerstraße 33-35\, 74343 Sachsenheim-Großsachsenheim
-DESCRIPTION:Spielnummer 100158\nLiveticker: wird zum Spielstart ergänzt.\nSpielbericht (PDF): wird ergänzt\, sobald Handball4all ihn bereitstellt.
+DESCRIPTION:Spielnummer 100158\nLiveticker: https://spo.handball4all.de/service/ticker/index.html?token=c7eca9e6e0ff941eb8bb319d35532544\nSpielbericht (PDF): wird ergänzt\, sobald Handball4all ihn bereitstellt.
 END:VEVENT
 BEGIN:VEVENT
 UID:9448726@handball4all.de
