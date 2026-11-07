@@ -7845,7 +7845,7 @@ DTSTART;TZID=Europe/Berlin:20261107T163000
 DTEND;TZID=Europe/Berlin:20261107T183000
 SUMMARY:HSG Heilbronn 2 – HC Metter-Enz
 LOCATION:Leintalsporthalle\, Würzburger Straße\, 74078 Heilbronn-Frankenbach
-DESCRIPTION:Spielnummer 100723\nLiveticker: wird zum Spielstart ergänzt.\nSpielbericht (PDF): wird ergänzt\, sobald Handball4all ihn bereitstellt.
+DESCRIPTION:Spielnummer 100723\nLiveticker: https://spo.handball4all.de/service/ticker/index.html?token=a533e385d6aeb79564f53551e5a50387\nSpielbericht (PDF): wird ergänzt\, sobald Handball4all ihn bereitstellt.
 END:VEVENT
 BEGIN:VEVENT
 UID:9450706@handball4all.de
