@@ -10459,7 +10459,7 @@ DTSTART;TZID=Europe/Berlin:20261114T200000
 DTEND;TZID=Europe/Berlin:20261114T220000
 SUMMARY:HC Metter-Enz – TSV Hardth.
 LOCATION:Kaltensteinhalle\, Alter Postweg 10\, 71665 Vaihingen/Enz
-DESCRIPTION:Spielnummer 100726\nLiveticker: wird zum Spielstart ergänzt.\nSpielbericht (PDF): wird ergänzt\, sobald Handball4all ihn bereitstellt.
+DESCRIPTION:Spielnummer 100726\nLiveticker: https://spo.handball4all.de/service/ticker/index.html?token=d69fbe93692a8a00605ef53018cca01e\nSpielbericht (PDF): wird ergänzt\, sobald Handball4all ihn bereitstellt.
 END:VEVENT
 BEGIN:VEVENT
 UID:9450736@handball4all.de
