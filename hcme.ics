@@ -15602,7 +15602,7 @@ DTSTART;TZID=Europe/Berlin:20261114T180000
 DTEND;TZID=Europe/Berlin:20261114T200000
 SUMMARY:HC Metter-Enz – HSG Strohgäu
 LOCATION:Kaltensteinhalle\, Alter Postweg 10\, 71665 Vaihingen/Enz
-DESCRIPTION:Spielnummer 100166\nLiveticker: wird zum Spielstart ergänzt.\nSpielbericht (PDF): wird ergänzt\, sobald Handball4all ihn bereitstellt.
+DESCRIPTION:Spielnummer 100166\nLiveticker: https://spo.handball4all.de/service/ticker/index.html?token=1110982c2199aeecd873cdf09807acb4\nSpielbericht (PDF): wird ergänzt\, sobald Handball4all ihn bereitstellt.
 END:VEVENT
 BEGIN:VEVENT
 UID:9448766@handball4all.de
