@@ -18206,7 +18206,7 @@ DTSTART;TZID=Europe/Berlin:20261121T200000
 DTEND;TZID=Europe/Berlin:20261121T220000
 SUMMARY:HC Metter-Enz – Bottwar SG 3
 LOCATION:Sporthalle Großsachsenheim\, Oberriexingerstraße 33-35\, 74343 Sachsenheim-Großsachsenheim
-DESCRIPTION:Spielnummer 100174\nLiveticker: wird zum Spielstart ergänzt.\nSpielbericht (PDF): wird ergänzt\, sobald Handball4all ihn bereitstellt.
+DESCRIPTION:Spielnummer 100174\nLiveticker: https://spo.handball4all.de/service/ticker/index.html?token=cb1590806f896c8b035bf5f8d99f2f3e\nSpielbericht (PDF): wird ergänzt\, sobald Handball4all ihn bereitstellt.
 END:VEVENT
 BEGIN:VEVENT
 UID:9448771@handball4all.de
