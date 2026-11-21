@@ -13047,7 +13047,7 @@ DTSTART;TZID=Europe/Berlin:20261121T180000
 DTEND;TZID=Europe/Berlin:20261121T200000
 SUMMARY:HC Metter-Enz – TSV Asperg
 LOCATION:Sporthalle Großsachsenheim\, Oberriexingerstraße 33-35\, 74343 Sachsenheim-Großsachsenheim
-DESCRIPTION:Spielnummer 100732\nLiveticker: wird zum Spielstart ergänzt.\nSpielbericht (PDF): wird ergänzt\, sobald Handball4all ihn bereitstellt.
+DESCRIPTION:Spielnummer 100732\nLiveticker: https://spo.handball4all.de/service/ticker/index.html?token=81b3dcfd97d26eae8b05bd25de2229c6\nSpielbericht (PDF): wird ergänzt\, sobald Handball4all ihn bereitstellt.
 END:VEVENT
 BEGIN:VEVENT
 UID:9450741@handball4all.de
